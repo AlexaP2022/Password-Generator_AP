@@ -1,11 +1,11 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector("#generate"); 
 
 // Add event listener to generate button (moved to top from bottom)
 generateBtn.addEventListener("click", writePassword);
 
-//variable declarations
-var userChoiceLength = "";
+// Variable declarations to be used with prompt, alert, confirm
+var userChoiceLength = ""; // variable for length left empty for user input to declare once answered in lines 29-35
 var userChoiceNumbers;
 var userChoiceSpecChars;
 var userChoiceLowerCase;
@@ -26,7 +26,7 @@ for (var i = 0; i <lowerCaseArray.length; i++) {
 // Function to generate password
 function generatePassword() {
   
-  var userChoiceLength = window.prompt("How many characters would you like your password to have?")
+  var userChoiceLength = window.prompt("How many characters would you like your password to have? \n(Must be between 8 and 128 characters).")
 
   //loop if answer to number of characters is not within bounds 8<userChoiceLength<128
   
@@ -42,7 +42,7 @@ function generatePassword() {
 
     //loop if user declines all parameters (alert that they must choose at least one)
 
-    while(userChoiceNumbers === false && userChoiceSpecChars === false && userChoiceLowerCase === false && userChoiceUpperCase === false) {
+    while(userChoiceNumbers == false && userChoiceSpecChars == false && userChoiceLowerCase == false && userChoiceUpperCase == false) {
       alert("You must select at least one parameter to generate a password.")
       var userChoiceNumbers = window.confirm("Would you like numbers in your password?")
       var userChoiceSpecChars = window.confirm("Would you like special characters in your password?")
@@ -50,16 +50,51 @@ function generatePassword() {
       var userChoiceUpperCase = window.confirm("Would you like upper case letters in your password?")
     }
 
-//console logging to check that user input is being stored in the corresponding variables (which they are)
+//console logging to check that user input is being stored in the corresponding variables (true = ok / false = cancel)
 console.log(userChoiceLength)
 console.log(userChoiceNumbers)
 console.log(userChoiceSpecChars)
 console.log(userChoiceLowerCase)
 console.log(userChoiceUpperCase)
 
+//create a new array for chosen elements to go 
+var chosenCharactersArray = [];
 
+//series of If statements to concatinate password component arrays to chosenCharactersArray based on user input, ok (true) or cancel (false) to each character type
+
+if(userChoiceNumbers === true) {
+  chosenCharactersArray = chosenCharactersArray.concat(numbersArray)
+} 
+
+if(userChoiceSpecChars === true) {
+  chosenCharactersArray = chosenCharactersArray.concat(specCharsArray)
 }
 
+if(userChoiceLowerCase === true) {
+  chosenCharactersArray = chosenCharactersArray.concat(lowerCaseArray)
+}
+
+if(userChoiceUpperCase === true) {
+  chosenCharactersArray = chosenCharactersArray.concat(upperCaseArray)
+}
+
+console.log(chosenCharactersArray); // results in narrowed down array of characters selected by user
+
+
+var randomPassword = ""; // randomPassword variable declared
+
+// for (var i = 0; i < userChoiceLength; i++) {
+//  use Math.floor() and Math.random() to select random password
+
+for(var i = 0; i <userChoiceLength; i++) {
+  randomPassword = randomPassword + chosenCharactersArray[Math.floor(Math.random() * userChoiceLength)]; // concatinates the randomly selected characters onto itself each time it runs
+}
+
+console.log(randomPassword)
+
+return randomPassword;
+
+}
 
 // Write password to the #password input
 function writePassword() {
@@ -69,6 +104,7 @@ function writePassword() {
   passwordText.value = password;
 
 }
+
 
 
 
