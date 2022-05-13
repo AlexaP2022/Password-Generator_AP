@@ -16,6 +16,6 @@ The screenshots below show the different window prompts/alerts/confirms.  The la
 
 ![ScreenShot](/screenshots/PG%20img%204.png)
 
-![ScreenShot](/screenshots/PG%20img%205.pngg)
+![ScreenShot](/screenshots/PG%20img%205.png)
 
 ![ScreenShot](/screenshots/PG%20img%206.png)
